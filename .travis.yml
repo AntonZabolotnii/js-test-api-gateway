@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - '10.4.1'
+branches:
+  only:
+    - master
+jobs:
+  script: ./script/build.sh
+  include:
+    - stage: npm release
+      node_js: "10.4.1"
+      script: echo "Deploying to npm ..."
+      deploy:
+        provider: npm
+        email: antonzabolotny@gmail.com
+        api_key:
+          secure: njSAX7ATbP1XS9vD0Nuyaz2fGJwfUyK4qhbOtT5cpCEMVw124FeeaoJV1lcQH3OJns9XlpuAKzI8Jmhohiula7hxmMDbXTtK4oCyjW1RdFrX/RkJmyAQphpcnSqH6N7YVytDkBLX2UThbZY3rNl1A1CQJcZAkmCoFeFMB/TRKxrdkKFX1Ox/zGzb+11BeqgkVADiJJjygebJqJMaTzyuFLLFeiI9dV+w7jedlElK70gpCKDK8+kGE9YrJ2RxsqNgcWStOohEI3Sj/dmR2eKMWPk1ZICLgLIc71fPzPyUKD0RSJ/lhF9hqaSvZ9qj2j1h19woosgCwo2/35sSLGiCJEAjZcXx2uoF3ZKV+wHNFeyoqdJmPE7BSTwhpvXyRkLPzxSN9X0tpxbAkrFfi+XIrzIQNzq/ChKKZddG2zOpjZ18Lg2aCC+ns0+p1hcX7Z2WQb8q6VWnY7NFr47r+yVxhjz3PPjTsB/1i6YQ+M6Vz3Fw8Nt/siO0jN/q2s4vy2+R0dapa1/yQ61G+UGRcOsiV49ot2mGVODroA7yK2T60hXW2czM4qjqoW1ZuhrVQx21XF6ocWwvohHXkyNaCcJvHlE/H3dzdolscZJ6oAYEvVhrgjxjZPUWncK+rqj4M5ceIX4aHHKwu5OPp5oa/+loaIplJHfTDlmGqw3S+N7MiOM=
+          secure: PQr5UUGj8KG1TYoyd31B+De8w9cyqOGb2PS9UHMgKaXgr+elWqL9zOCZZsRDF8yw/P2ThV6KpFbq7uNX20Lg5e2zKDIJFRzckn3/CwzhvYlTj749PfhexrYVaXy+iv5qWlTYTqLmARkIctKaf/ZPVLnqhx3XepjF730ZessV4nUYOy+z08rYcItdQHhTwk+HNT4USFEIclVd1TLc7VHq/cvh3mwuQ47aIUIF7CcKdGZEoIuHUOe38jdt+GpaHLf3JcZxjiX2j78sxQkgIuvCHshLjCqqn2RkkDBDq3xO7HuPfdkKQJ7qef95rILPd5AWWmML7EW9X6+okGjqZBfNOmI75qg6ZgXUxT2lZ3QdI8U+0QtMvzlL0B5N3Zn8z+fcOrI7izF740kmf/0UsPy+LM3FhbENj7jQVIKiQcn9MZbqplTq0zkJZyoRCc29qB8d9LIiiFcdcaMDsi/jzL+cNsHUSuSTsN5lNHhlH4QBAHNmjYkYIDWbxmmKvKwoUpPc/NY07A2ys709p+oLlN+Mi8pae+H315Hgga62M6L3UR+sOINLQyu2Orz37TdE8r9jTbl/25KTCaBWAmu3zjmI1rFPQt4JLMWNIwrc0uzhE5F+tRY6VAGCkzpSmeLU6sTw4zXK32A0j7j8ed9TLK3CDZMfmi+ymR1rfdjpg6xqkQU=

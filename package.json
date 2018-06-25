@@ -1,0 +1,28 @@
+{
+  "name": "api-gateway-test",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "lint": "./node_modules/.bin/eslint ./"
+  },
+  "author": "Anton Zabolotnii",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AntonZabolotnii/js-test-api-gateway"
+  },
+  "engines": {
+    "node": ">=10.4.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^5.0.0",
+    "mocha": "^5.2.0"
+  }
+}
