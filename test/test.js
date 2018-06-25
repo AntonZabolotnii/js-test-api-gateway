@@ -4,7 +4,7 @@ const gateway = require('../index');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
-const { port } = require('../config');
+const { PORT, RESOURCES } = require('../config');
 const testRoutes = require('./dummy/routes');
 
 chai.should();
@@ -12,18 +12,17 @@ chai.use(chaiHttp);
 
 describe('API Gateway Test Suite', function() {
 
-  const path = '/api/resources';
   let requester;
 
   before(function() {
     app.use(testRoutes);
     app.use(gateway);
-    app.listen(port);
+    app.listen(PORT);
     requester = chai.request(app).keepOpen();
   });
 
-  it('Should return status code 200 for /api/resources', function(done) {
-    requester.get(path).end((err, res) => {
+  it(`Should return status code 200 for ${RESOURCES}`, function(done) {
+    requester.get(RESOURCES).end((err, res) => {
       if (err) done(err);
       expect(res).to.have.status(200);
       done();
@@ -33,7 +32,7 @@ describe('API Gateway Test Suite', function() {
   it('Should have property users and customers', function(done) {
 
     const tmp = fs.createWriteStream('./test/test.json');
-    const req = requester.get(path).query({users: '/api/users', customers: '/api/customers'});
+    const req = requester.get(RESOURCES).query({users: '/api/users', customers: '/api/customers'});
 
     req.pipe(tmp);
 
@@ -56,7 +55,7 @@ describe('API Gateway Test Suite', function() {
   it('Should return json with error description for unknown path', function(done) {
 
     const tmp = fs.createWriteStream('./test/test.json');
-    const req = requester.get(path).query({unknown: '/api/unknown'});
+    const req = requester.get(RESOURCES).query({unknown: '/api/unknown'});
 
     req.pipe(tmp);
 

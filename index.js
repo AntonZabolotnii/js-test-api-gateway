@@ -1,9 +1,11 @@
 const express = require('express');
 const http = require('http');
-const config = require('./config');
 const router = express.Router();
+const config = require('./config');
 
-router.get('/api/resources', function(req, res) {
+const { PROTOCOL, HOSTNAME, PORT, TIMEOUT, RESOURCES } = config;
+
+router.get(RESOURCES, function(req, res) {
   const query = req.query;
   const queryEntries = Object.entries(query);
   const length = queryEntries.length;
@@ -58,13 +60,12 @@ router.get('/api/resources', function(req, res) {
   const promises = queryEntries.map(queryItem => {
     return new Promise(resolve => {
       const [key, path] = queryItem;
-      const { protocol, hostname, port, timeout } = config;
 
-      const request = http.get({protocol, hostname, port, path})
+      const request = http.get({protocol: PROTOCOL, hostname: HOSTNAME, port: PORT, path})
         .on('response', (response) => {
           resolve(handleResponse(key, response));
         })
-        .setTimeout(timeout, () => {
+        .setTimeout(TIMEOUT, () => {
           request.abort();
           resolve(handleResponse(key, null, {error: `Response timeout for path: ${req.path}`}));
         })

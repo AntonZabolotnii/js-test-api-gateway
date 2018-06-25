@@ -4,20 +4,29 @@ Assume that your server has few endpoints and instead of making a separate reque
 you want to make only single request and get all data at once. This module intended to make it possible.
 
 ## Usage
-> npm i --save api-gateway-test
+```
+npm i --save api-gateway-test
 
-> const app = require('express')();
+const app = require('express')();
 
-> const gateway = require('api-gateway-test');
+const gateway = require('api-gateway-test');
 
-> app.use(...);
+app.use(...);
 
-> app.use(gateway);
+app.use(gateway);
+```
 
 ## Example
 
 Assuming that the server has routes `/api/users`, `/api/countries` and so on, making a request to
 `/api/resources` with specified parameters should return joint data for each of underlying resources.
+
+Request to enpoint like `/api/users` could be configured with environment variables:  
+`process.env.PROTOCOL` (default `http`)  
+`process.env.HOSTNAME` (default `localhost`)  
+`process.env.PORT` (default `3000`)  
+`process.env.TIMEOUT` (default `30sec`)  
+The value of `/api/resources` also configurable by `process.env.RESOURCES`
 
 http://localhost:3000/api/resources?users=/api/users&countries=/api/countries&user=/api/users/user1&customers=/api/customers
 
